@@ -103,7 +103,12 @@ module WarPack
       end
     end
 
+    def pom_file
+      raise 'overwrite this method'
+    end
+
     def exec( *args )
+      maven.options[ '-f' ] ||= pom_file
       args.unshift :clean if clean?
       maven.exec( *args )
     end

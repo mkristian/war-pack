@@ -2,7 +2,7 @@ require 'war_pack/dumper'
 module WarPack
   class Dump  < Dumper
 
-    # overwrite method from Dumper
+    # overwrite method
     def pom_file
       WarPack.file( rails?  ? 
                     'pack_rails_pom.rb' :

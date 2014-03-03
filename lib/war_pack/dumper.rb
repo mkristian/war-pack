@@ -32,10 +32,6 @@ module WarPack
 
     protected
 
-    def pom_file
-      raise 'overwrite this method'
-    end
-
     def write( file, mode, plugin_only )
       File.open( file, mode ) do |f|
         f.print( File.read( WarPack.common_pom ) ) unless plugin_only
