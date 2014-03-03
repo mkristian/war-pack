@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+require 'rubygems'
+# ensure we use the right version
+gem 'ruby-maven', '>=3.1.0'
+
+require 'war_pack/cli'
+
+if ARGV == [] || ARGV.all?{ |a| a.match( /^-/ ) }
+  ARGV.unshift 'pack'
+end
+
+WarPack::Cli.start
