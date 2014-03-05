@@ -23,7 +23,6 @@ describe WarPack::PomRunner do
       v.sub!( /^#{pwd}/, '') if v.is_a? String
     end
     expected = {
-      "-Dis_rails"=>false, 
       "-Dbase.dir"=>"", 
       "-Drun.port"=>8080, 
       "-Drun.sslport"=>8443, 
@@ -31,8 +30,9 @@ describe WarPack::PomRunner do
       "-Drun.keystore.pass"=>"123456", 
       "-Drun.truststore.pass"=>"123456", 
       "-Dcommon.pom"=>"/lib/war_pack/common_pom.rb", 
-      "-Dverbose" => false,
+      "-Dverbose"=>false,
       "-q"=>nil, 
+      "-Dfinal.name"=>"war-pack",
       "-f"=>"Mavenfile"
     }
     opts.to_yaml.must_equal expected.to_yaml
@@ -56,7 +56,6 @@ describe WarPack::PomRunner do
       v.sub!( /^#{pwd}/, '') if v.is_a? String
     end
     expected = {
-      "-Dis_rails"=>false, 
       "-Dbase.dir"=>"", 
       "-Dpublic.dir"=>"", 
       "-Dwork.dir"=>"/target", 

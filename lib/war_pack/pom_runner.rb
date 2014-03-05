@@ -19,7 +19,6 @@ module WarPack
       @m ||= 
         begin
           m = Maven::Ruby::Maven.new
-          m.property( 'is_rails', rails? )
           m.property( 'base.dir', File.expand_path( basedir ) )
           m.property( 'public.dir', File.expand_path( publicdir ) ) if publicdir
           m.property( 'work.dir', File.expand_path( workdir ) ) if workdir
@@ -34,7 +33,7 @@ module WarPack
           m.property( 'verbose', debug || verbose )
           m.options[ '-q' ] = nil if !debug and !verbose
           m.options[ '-X' ] = nil if debug
-          m.property( 'final.name', final_name ) if final_name
+          m.property( 'final.name', final_name )
           m.verbose = debug
           m.options[ '-f' ] = mavenfile if mavenfile
           m
@@ -54,7 +53,7 @@ module WarPack
     end
 
     def final_name
-      @config[ 'final_name' ]
+      @config[ 'final_name' ] || File.basename( basedir )
     end
 
     def publicdir
