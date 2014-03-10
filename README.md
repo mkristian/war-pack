@@ -56,7 +56,7 @@ deployment as war-file without unpacking just does never finsih deployment, so i
 
 deployment when the war-file gets unpacked works as is.
 
-works with [jetty-run](../jetty-run) and [tomcat-run](../tomcat-run) gems
+works with [jetty-run](https://github.com/mkristian/jetty-run) and [tomcat-run](https://github.com/mkristian/tomcat-run) gems
 
 ### jetty-7, jetty-8, jetty-9 ###
 
@@ -64,7 +64,7 @@ deployment as war-file without unpacking produces lots of error with the packed 
 
 deployment when the war-file gets unpacked works as is.
 
-works with [jetty-run](../jetty-run) and [tomcat-run](../tomcat-run) gems
+works with [jetty-run](https://github.com/mkristian/jetty-run) and [tomcat-run](https://github.com/mkristian/tomcat-run) gems
 
 ### websphere ###
 
