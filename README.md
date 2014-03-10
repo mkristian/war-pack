@@ -56,7 +56,7 @@ deployment as war-file without unpacking just does never finsih deployment, so i
 
 deployment when the war-file gets unpacked works as is.
 
-works with jetty-run and tomcat-run gems
+works with [jetty-run](../jetty-run) and [tomcat-run](../tomcat-run) gems
 
 ### jetty-7, jetty-8, jetty-9 ###
 
@@ -64,9 +64,9 @@ deployment as war-file without unpacking produces lots of error with the packed 
 
 deployment when the war-file gets unpacked works as is.
 
-works with jetty-run and tomcat-run gems
+works with [jetty-run](../jetty-run) and [tomcat-run](../tomcat-run) gems
 
-### websphere LIBERTY profile ###
+### websphere ###
 
 some jruby versions needs to explicitly require the bouncy-castle jars see ```public/WEB-INF/init.rb```.
 
@@ -128,3 +128,17 @@ summarizing the technical details:
 ## more ##
 
 probably, but some other time ;)
+
+## contributing ##
+
+1. fork it
+2. create your feature branch (`git checkout -b my-new-feature`)
+3. commit your changes (`git commit -am 'Added some feature'`)
+4. push to the branch (`git push origin my-new-feature`)
+5. create new Pull Request
+
+## extra-fu ##
+
+bug-reports and pull request are most welcome. otherwise
+
+enjoy :) 
