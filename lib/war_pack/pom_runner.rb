@@ -64,6 +64,11 @@ module WarPack
        @config[ 'workdir' ]
     end
 
+    def work_dir
+      # needs default here
+      workdir || 'pkg'
+    end
+
     def debug
        @config[ 'debug' ] || false
     end
@@ -93,12 +98,11 @@ module WarPack
       File.exists?( File.join( 'config', 'application.rb' ) )
     end
 
-    def copy_webxml( source, webxml = 'web.xml' )
+    def copy( source, target = nil )
       return unless web_inf
-      target = File.join( web_inf, webxml )
+      target = File.join( web_inf, target || File.basename( source ) )
       unless File.exists?( target )
-        webxml = WarPack.file( source )
-        FileUtils.cp( webxml, target )
+        FileUtils.cp( WarPack.file( source ), target )
       end
     end
 

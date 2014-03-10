@@ -10,7 +10,7 @@ properties( 'project.build.sourceEncoding' => 'utf-8',
             'classes.dir' => '${webinf.dir}/classes',
             'lib.dir' => '${base.dir}/lib',
             'gem.home' => '${classes.dir}',
-            'gem.path' => '${classes.dir}',
+            'gem.path' => '${gem.home}',
             'work.dir' => '${base.dir}/pkg'  )
 
 # ruby-maven will dump an equivalent pom.xml
@@ -44,7 +44,7 @@ phase 'prepare-package' do
   end
 end
 
-jruby_plugin :gem, :includeRubygemsInTestResources => false, :includeRubygemsResources => true  do
+jruby_plugin :gem, :includeRubygemsInTestResources => false, :includeRubygemsResources => true do
   execute_goal :initialize
 end
 

@@ -72,10 +72,13 @@ some jruby versions needs to explicitly require the bouncy-castle jars see ```pu
 
 deployment as war-file without unpacking needs to add these default gems to the Gemfile (bundler might not install depending on the jruby version and its default gems):
 
-    platforms :jruby do
-	  gem 'jruby-openssl'
-      gem 'krypt'
-    end
+    gem 'jruby-openssl', :platform => :jruby
+    gem 'krypt', :platform => :jruby
+
+as well in ```public/WEB-INF/init.rb``` those gems needs to be activated explicitly with:
+
+    gem 'jruby-openssl'
+    gem 'krypt'
 
 the gem-maven-plugin used for packing here does installs those declared gems as needed. with this in place deploment of packed warfiles works.
 

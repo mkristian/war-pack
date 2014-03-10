@@ -3,18 +3,19 @@ module WarPack
   class Pack < PomRunner
 
     def pack
-      copy_webxml( rails? ? 'web-production.xml' : 'web.xml', 'web-pack.xml' )
+      copy( 'web.xml', 'web-pack.xml' )
+      copy( 'init.rb' )
+
+      puts "creating #{final_name}.war . . ."
 
       exec :package
 
-      war = "#{workdir}/#{final_name}.war"
+      war = "#{work_dir}/#{final_name}.war"
       puts war if File.exists?( war )
     end
 
     def pom_file
-      WarPack.file( rails? ? 
-                    'pack_rails_pom.rb' :
-                    'pack_rack_pom.rb' )
+      WarPack.file( 'pack_pom.rb' )
     end
   end
 end

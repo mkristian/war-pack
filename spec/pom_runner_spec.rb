@@ -82,7 +82,7 @@ describe WarPack::PomRunner do
   it 'copies web.xml if missing' do
     FileUtils.rm_f( webxml )
     FileUtils.chdir( workdir ) do
-      subject.copy_webxml( 'web.xml' )
+      subject.copy( 'web.xml' )
     end
     File.exists?( webxml ).must_equal true
   end
@@ -91,7 +91,7 @@ describe WarPack::PomRunner do
     FileUtils.rm_f( webxml )
     FileUtils.touch( webxml )
     FileUtils.chdir( workdir ) do
-      subject.copy_webxml( 'web.xml' )
+      subject.copy( 'web.xml' )
     end
     File.exists?( webxml ).must_equal true
     File.size( webxml ).must_equal 0

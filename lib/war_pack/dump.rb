@@ -4,9 +4,7 @@ module WarPack
 
     # overwrite method
     def pom_file
-      WarPack.file( rails?  ? 
-                    'pack_rails_pom.rb' :
-                    'pack_rack_pom.rb' )
+      WarPack.file( 'pack_pom.rb' )
     end
   end
 end
