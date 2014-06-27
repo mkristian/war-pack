@@ -14,7 +14,7 @@ matrix:
       jdk: openjdk7
       script: mvn test
     - rvm: ruby
-      jdk: openjdk7
+      jdk: oraclejdk7
       script: mvn test
     - rvm: ruby
       jdk: oraclejdk8
