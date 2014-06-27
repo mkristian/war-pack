@@ -25,7 +25,7 @@
     <url>https://github.com/mkristian/war-pack</url>
   </scm>
   <properties>
-    <jruby.version>1.7.10</jruby.version>
+    <jruby.version>1.7.13</jruby.version>
     <tesla.dump.readonly>true</tesla.dump.readonly>
     <jruby.modes>1.8,1.9,2.0,2.1</jruby.modes>
     <jruby.plugins.version>1.0.3</jruby.plugins.version>
@@ -76,27 +76,6 @@
             <goals>
               <goal>spec</goal>
             </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <artifactId>maven-invoker-plugin</artifactId>
-        <version>1.8</version>
-        <executions>
-          <execution>
-            <id>integration-test</id>
-            <goals>
-              <goal>run</goal>
-            </goals>
-            <configuration>
-              <projectsDirectory>integration</projectsDirectory>
-              <streamLogs>true</streamLogs>
-              <pomIncludes>
-                <pomInclude>*</pomInclude>
-              </pomIncludes>
-              <preBuildHookScript>setup</preBuildHookScript>
-              <postBuildHookScript>verify</postBuildHookScript>
-            </configuration>
           </execution>
         </executions>
       </plugin>
