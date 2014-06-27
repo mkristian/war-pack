@@ -8,7 +8,7 @@ jruby_plugin :minitest do
   execute_goals( :spec )
 end
 
-snapshot_repository :jruby, 'http://ci.jruby.org/snapshots'
+snapshot_repository :jruby, 'http://ci.jruby.org/snapshots/maven'
 
 properties( 'jruby.versions' => ['1.5.6','1.6.8','1.7.13','9000.dev-SNAPSHOT'].join(','),
             'jruby.modes' => ['1.8', '1.9', '2.0','2.1'].join(','),
