@@ -20,7 +20,12 @@ module WarPack
         begin
           m = Maven::Ruby::Maven.new
           m.property( 'base.dir', File.expand_path( basedir ) )
-          m.property( 'public.dir', File.expand_path( publicdir ) ) if publicdir
+          if File.exists?( public_dir )
+            m.property( 'public.dir', File.expand_path( publicdir ) )
+         elsif publicdir
+             m.property( 'public.dir', File.expand_path( '.' ) )
+             m.property( 'webinf.dir', File.expand_path( web_inf ) )
+          end
           m.property( 'work.dir', File.expand_path( workdir ) ) if workdir
           m.property( 'run.port', @ports.port )
           if @ports.sslport > 0
@@ -32,6 +37,7 @@ module WarPack
           m.property( 'common.pom', WarPack.common_pom )
           m.property( 'verbose', debug || verbose )
           m.options[ '-q' ] = nil if !debug and !verbose
+          m.options[ '-e' ] = nil if !debug and verbose
           m.options[ '-X' ] = nil if debug
           m.property( 'final.name', final_name )
           m.verbose = debug
@@ -81,17 +87,21 @@ module WarPack
        @config[ 'clean' ] || false      
     end
 
+    def public_dir
+      publicdir || 'public'
+    end
+
     def web_inf
-      # if the publicdir or its default exists we can use web_inf
-      public_dir = publicdir || 'public'
-      if File.exists? public_dir
-        @web_inf ||= 
-          begin
-            d = File.join( public_dir  , 'WEB-INF' )
-            FileUtils.mkdir_p d
-            d
-          end
+      pdir = public_dir
+      unless File.exists? public_dir
+        pdir = '.'
       end
+      @web_inf ||= 
+        begin
+          d = File.join( pdir, 'WEB-INF' )
+          FileUtils.mkdir_p d
+          d
+        end
     end
 
     def rails?

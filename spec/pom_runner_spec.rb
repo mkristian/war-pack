@@ -4,7 +4,7 @@ require 'yaml'
 describe WarPack::PomRunner do
 
   let( :workdir ) { 'pkg' }
-  let( :webxml ) { File.join( workdir, 'public', 'WEB-INF', 'web.xml' ) }
+  let( :webxml ) { File.join( workdir, 'WEB-INF', 'web.xml' ) }
     
   let( :config ) { {} }
 
@@ -88,6 +88,7 @@ describe WarPack::PomRunner do
   end
 
   it 'does not copy web.xml if it already exists' do
+    FileUtils.mkdir_p( File.dirname( webxml ) )
     FileUtils.rm_f( webxml )
     FileUtils.touch( webxml )
     FileUtils.chdir( workdir ) do

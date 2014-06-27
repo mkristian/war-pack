@@ -38,6 +38,9 @@ module WarPack
 
     def write( file, mode, plugin_only )
       File.open( file, mode ) do |f|
+        f.puts '#-*- mode: ruby -*-'
+        f.puts
+
         f.print( File.read( WarPack.common_pom ) ) unless plugin_only
         
         call_prepend( f )
@@ -47,6 +50,9 @@ module WarPack
         f.print( content )
 
         call_append( f )
+
+        f.puts
+        f.puts( '# vim: syntax=Ruby' )
       end
     end
 

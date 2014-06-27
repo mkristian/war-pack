@@ -1,23 +1,25 @@
-eval( File.read( java.lang.System.getProperty( "common.pom" ) ), nil, 
-      java.lang.System.getProperty( "common.pom" ) )
+eval( File.read( java.lang.System.getProperty( "common.pom" ) ), nil,
+      java.lang.System.getProperty( "common.pom" ) ) 
+
+jruby_plugin!( :gem,
+               :includeLibDirectoryInResources => true,
+               :includeRubygemsInResources => true )
 
 plugin( :war, '2.2',
         :warSourceDirectory => '${public.dir}',
-        :warSourceExcludes => [ 'WEB-INF/classes/META-INF/maven/*',
-                                'WEB-INF/classes/META-INF/MANIFEST.MF',
-                                'WEB-INF/classes/gems/jruby-jars-*/**/*',
-                                'WEB-INF/classes/bin/*',
-                                'WEB-INF/classes/cache/*',
-                                'WEB-INF/classes/doc/*',
-                                'WEB-INF/classes/build_info/*',
-                                # resin compiles those files automatically
-                                # so we just leave them out
-                                'WEB-INF/classes/gems/**/*.java' ].join(','),
         :webResources => [ { :directory => '${base.dir}',
                              :targetPath => 'WEB-INF',
-                             :includes => [ 'config.ru' ] },
-                           { :directory => '${lib.dir}',
-                             :targetPath => 'WEB-INF/classes' } ],
-        :webXml => '${webinf.dir}/web-pack.xml' )
+                             :includes => [ 'config.ru' ] } ] )
 
-# vim: syntax=Ruby
+gem 'war-pack', '${war_pack.version}', :scope => :provided
+execute :war_plugin, :phase => 'prepare-package'do |ctx|
+  Gem.path << 'pkg/rubygems'
+  Gem.path << 'pkg/rubygems-provided'
+
+  require 'war_pack/maven_plugin'
+
+  plugin = WarPack::MavenPlugin.new( ctx )
+
+  plugin.remove_java_source_files_from_gems
+  plugin.generate_load_path
+end

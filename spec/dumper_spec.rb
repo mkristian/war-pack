@@ -6,6 +6,7 @@ class Dumper < WarPack::Dumper
     File.join( 'pkg', 'dummy' )
   end
 end
+
 describe WarPack::Dumper do
 
   let( :workdir ) { 'pkg' }
@@ -20,7 +21,7 @@ describe WarPack::Dumper do
 
   before do
     FileUtils.mkdir_p( workdir )
-    File.open( dummy, 'w' ) { |f| f.puts '# dummy' }
+    File.open( dummy, 'w' ) { |f| f.puts 'dummy' }
   end
 
   it 'creates file' do
@@ -60,9 +61,9 @@ describe WarPack::Dumper do
     File.exists?( target ).must_equal true
     size = File.size( target )
     size.wont_equal 0
-    File.read( dummy ).must_equal File.read( target )
+    File.read( dummy ).strip.must_equal File.read( target ).gsub( /^#.*/, '' ).strip
     subject.dump( target )
     File.size( target ).must_equal 2*size
-    ( File.read( dummy ) * 2 ).must_equal File.read( target )
+    ( File.read( dummy ).strip * 2 ).must_equal File.read( target ).gsub( /^#.*/, '' ).strip.gsub( /\n/, '' )
   end
 end
