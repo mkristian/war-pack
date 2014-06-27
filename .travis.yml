@@ -7,16 +7,16 @@ rvm:
   - ruby-head
 matrix:
   include:
-    - rvm: ruby
+    - rvm: jruby
       jdk: openjdk6
       script: mvn test
-    - rvm: ruby
+    - rvm: jruby
       jdk: openjdk7
       script: mvn test
-    - rvm: ruby
+    - rvm: jruby
       jdk: oraclejdk7
       script: mvn test
-    - rvm: ruby
+    - rvm: jruby
       jdk: oraclejdk8
       script: mvn test
   allow_failures:
